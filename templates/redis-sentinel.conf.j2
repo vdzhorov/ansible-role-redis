@@ -1,0 +1,12 @@
+bind {{ ansible_default_ipv4.address }}
+port 26379
+dir "/var/lib/redis/sentinel"
+logfile /var/log/redis/sentinel.log
+
+protected-mode no
+
+sentinel monitor redis_master {{ redis_master }} 6379 {{ redis_slave_quorum }}
+
+sentinel down-after-milliseconds redis_master 3000
+sentinel failover-timeout redis_master 3000
+sentinel parallel-syncs redis_master 1
