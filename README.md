@@ -18,6 +18,10 @@ This needs to be installed on the deployment machine running Ansible, not on the
 
 3-node setup at minimum since we want to reach our Redis quorum and have proper switching between Redis masters.
 
+### Before you begin
+
+Configure your vars in vars/main.yml.
+
 ### Deployment
 
 This is a very simple role for Redis and Redis-Sentinel. Basically, you will need to do something like this when you have your prerequisites installed:
