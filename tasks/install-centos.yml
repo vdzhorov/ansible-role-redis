@@ -1,27 +1,20 @@
 ---
-# install redis server
 
-- name: Make sure EPEL repo is installed
-  yum:
-    name: epel-release
-    state: installed
-  tags: [redis]
-
-- name: Installing redis server
+- name: Install Redis server
   yum:
     name: redis
     state: installed
   notify: restart redis
   tags: [redis]
 
-- name: Enabling redis server
+- name: Enable Redis server
   service:
     name: redis
     enabled: yes
   notify: restart redis
   tags: [redis]
 
-- name: Enabling sentinel
+- name: Enable Sentinel
   service:
     name: redis-sentinel
     enabled: yes
@@ -40,19 +33,6 @@
   when: replication
   tags: [redis, sentinel]
 
-- name: Adjust net.core.somaxconn to 65535
-  lineinfile:
-    line: 'net.core.somaxconn=65535'
-    path: /etc/sysctl.conf
-    state: present
-    insertafter: EOF
-  notify:
-    - 'restart sentinel'
-    - 'restart redis'
-    - 'sysctl'
-  when: replication
-  tags: [redis, sentinel]
-
 - name: Configure redis-sentinel (/etc/redis-sentinel.conf)
   template:
     src: redis-sentinel.conf.j2
@@ -64,7 +44,7 @@
   when: replication
   tags: [redis, sentinel]
 
-- name: Configure redis (/etc/redis.conf)
+- name: Configure Redis (/etc/redis.conf)
   template:
     src: redis.conf.j2
     dest: /etc/redis.conf
@@ -74,3 +54,12 @@
   notify: restart redis
   when: replication
   tags: [redis, sentinel]
+
+- name: Adjust net.core.somaxconn to 65535
+  sysctl:
+    name: net.core.somaxconn
+    value: 65535
+    state: present
+  notify:
+    - 'restart sentinel'
+    - 'restart redis'
