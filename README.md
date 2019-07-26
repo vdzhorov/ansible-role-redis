@@ -1,6 +1,6 @@
 # Ansible redis role
 
-Role for Ansible which installs Redis and Redis-Sentinel in clustered state. At this point in time, this role supports only CentOS 7.
+Role for Ansible which installs Redis and Redis-Sentinel in clustered state. At this point in time, this role supports only CentOS 6 and CentOS 7.
 
 ## Getting Started
 
@@ -44,7 +44,7 @@ A playbook is not included in this role since this varies from setup to setup, b
 
 * [Ansible 2.5](https://docs.ansible.com/ansible/latest/roadmap/ROADMAP_2_5.html) - The main tool used for auto-deployment.
 
-* **Valentin Dzhorov** - *Initial work* - [Github](https://github.com/vdzhorov/redis-ansible)
+* **Valentin Dzhorov** - *Initial work* - [Github](https://github.com/vdzhorov/ansible-role-redis)
 
 ## License
 
