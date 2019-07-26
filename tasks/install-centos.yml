@@ -19,7 +19,7 @@
     name: redis-sentinel
     enabled: yes
   notify: restart sentinel
-  when: replication
+  when: replication|bool
   tags: [redis, sentinel]
 
 - name: Create /var/lib/redis/sentinel
@@ -30,7 +30,7 @@
     group: redis
     mode: 0755
   notify: restart sentinel
-  when: replication
+  when: replication|bool|bool
   tags: [redis, sentinel]
 
 - name: Configure redis-sentinel (/etc/redis-sentinel.conf)
@@ -41,7 +41,7 @@
     group: root
     mode: 0640
   notify: restart sentinel
-  when: replication
+  when: replication|bool
   tags: [redis, sentinel]
 
 - name: Configure Redis (/etc/redis.conf)
@@ -52,7 +52,7 @@
     group: root
     mode: 0640
   notify: restart redis
-  when: replication
+  when: replication|bool
   tags: [redis, sentinel]
 
 - name: Adjust net.core.somaxconn to 65535
