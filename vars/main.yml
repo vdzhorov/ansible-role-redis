@@ -1,6 +1,6 @@
 ---
 
 
-replication: True #wWhether you want master-slave replication or not
-redis_slave_quorum: 1 #Your quorum. Please read about quorum settings and how it works in redis since this is highly dependant on your setup.
-redis_master: '10.55.101.2' #Your initial redis master.
+replication: True # Whether you want master-slave replication or not
+redis_slave_quorum: 1 # Your quorum. Please read about quorum settings and how it works in redis since this is highly dependant on your setup.
+redis_master: '10.55.101.2' # Your initial redis master.
